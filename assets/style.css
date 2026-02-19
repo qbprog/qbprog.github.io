@@ -1,0 +1,187 @@
+/* --- Font principale --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+/* --- Variabili tema --- */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --link-color: #1a73e8;
+  --sidebar-bg: #f8f9fa;
+  --code-bg: #eaeaea;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --link-color: #8ab4f8;
+  --sidebar-bg: #1e1e1e;
+  --code-bg: #2c2c2c;
+}
+
+/* --- Applicazione variabili --- */
+body {
+  font-family: 'Noto Sans', sans-serif;
+  line-height: 1.6;
+  margin: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  /* Watermark leggero */
+  background-image: url('/assets/watermark.png'); /* filigrana PNG trasparente */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-attachment: fixed; /* rimane fisso quando scrolli */
+}
+[data-theme="dark"] body
+{
+  background-image: none;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+.main {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Contenuto principale 80% */
+.content {
+  flex: 4;
+  max-width: calc(100% - 20%);
+}
+
+/* Sidebar 20% */
+.sidebar {
+  flex: 1;
+  max-width: 250px;
+  position: sticky;
+  top: 2rem;
+  border-left: 1px solid #ddd;
+  padding-left: 1rem;
+  background-color: var(--sidebar-bg);
+}
+
+/* Lista post */
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+.sidebar li { margin-bottom: 0.5rem; }
+
+/* Blocchi codice */
+pre, code {
+  font-family: "Fira Code", monospace;
+  font-size: 0.9rem;
+  background: var(--code-bg);
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  display: block;
+  overflow-x: auto;
+}
+
+/* Titoli */
+h1, h2, h3, h4 {
+  color: var(--text-color);
+}
+
+/* Mobile */
+@media (max-width: 1024px) {
+  .main { flex-direction: column; }
+  .sidebar {
+    max-width: 100%;
+    border-left: none;
+    padding-left: 0;
+    margin-top: 2rem;
+    position: relative;
+    top: auto;
+  }
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* spazio verticale tra post */
+}
+
+.post-item h2 {
+  margin: 0 0 0.2rem 0;
+}
+
+.post-item .post-date {
+  color: #666;
+  font-size: 0.85rem;
+  margin-bottom: 0.3rem;
+}
+
+.post-item p {
+  margin: 0.2rem 0;
+}
+
+/* Rimuove la linea tra i post */
+.post-list li {
+  border-top: none !important;
+  border-bottom: none !important;
+  margin-bottom: 2rem; /* Spazio tra i post invece della linea */
+  list-style: none;    /* Rimuove i pallini se presenti */
+}
+
+/* Rimuove eventuali tag <hr> se li avevi messi */
+hr {
+  display: none;
+}
+
+/* Stilizza l'estratto del post */
+.post-excerpt {
+  color: #999;         /* Grigio chiaro */
+  font-size: 0.9rem;   /* Leggermente più piccolo del titolo */
+  line-height: 1.5;
+  margin-top: 5px;
+}
+
+/* Opzionale: un grigio ancora più chiaro se l'utente è in Dark Mode */
+[data-theme="dark"] .post-excerpt {
+  color: #777; 
+}
+
+header.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Theme toggle button */
+#theme-toggle {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--button-bg, #eee);
+}
+
+/* RSS button */
+.rss-button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  background-color: #ff6600;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.rss-button:hover {
+  background-color: #e65c00;
+}

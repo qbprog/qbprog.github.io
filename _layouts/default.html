@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/rouge.css' | relative_url }}">
+</head>
+<body>
+
+<!-- Toggle tema -->
+<header class="site-header">
+  <div class="header-left">
+    <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+  </div>
+  <div class="header-right">
+    <!-- Theme toggle button -->
+    <button id="theme-toggle">🌙 / ☀️</button>
+
+    <!-- RSS subscribe button -->
+    <a href="{{ '/feed.xml' | relative_url }}" class="rss-button" title="Subscribe to RSS">📡 RSS</a>
+  </div>
+</header>
+
+<div class="main">
+ 
+<div class="content">
+    {{ content }}
+</div>
+
+<aside class="sidebar">
+  <h3>Post</h3>
+  <ul>
+    {% for post in site.posts %}
+      {% if post.pinned %}
+        <li><strong>📌 <a href="{{ post.url }}">{{ post.title }}</a></strong></li>
+      {% endif %}
+    {% endfor %}
+
+    {% for post in site.posts %}
+      {% unless post.pinned %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endunless %}
+    {% endfor %}
+  </ul>
+</aside>
+
+</div>
+
+<script>
+(function() {
+  const toggle = document.getElementById("theme-toggle");
+  let theme = localStorage.getItem("theme") || "light";
+  document.documentElement.setAttribute("data-theme", theme);
+  toggle.textContent = theme === "light" ? "🌙" : "☀️";
+
+  toggle.addEventListener("click", () => {
+    theme = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    toggle.textContent = theme === "light" ? "🌙" : "☀️";
+  });
+})();
+</script>
+
+</body>
+</html>

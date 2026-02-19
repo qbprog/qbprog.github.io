@@ -1,0 +1,53 @@
+---
+layout: default
+---
+<article>
+  <h1>{{ page.title }}</h1>
+  <p><small>{{ page.date | date: "%d %B %Y" }}</small></p>
+  {{ content }}
+</article>
+
+<!-- GitHub Discussions via Giscus -->
+<div id="comments" style="margin-top:3rem;"></div>
+
+<script>
+  (function() {
+    const theme = document.documentElement.getAttribute('data-theme') || 'light';
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+
+    // Replace these with your repo info
+    script.setAttribute('data-repo', 'YOUR_USERNAME/YOUR_REPO');
+    script.setAttribute('data-repo-id', 'YOUR_REPO_ID');
+    script.setAttribute('data-category', 'Blog Comments');
+    script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-theme', theme);
+
+    document.getElementById('comments').appendChild(script);
+
+    // Optional: listen for theme changes and update Giscus
+    const observer = new MutationObserver(() => {
+      const newTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      if (newTheme !== theme) {
+        const iframe = document.querySelector('#comments iframe.giscus-frame');
+        if (iframe) {
+          iframe.contentWindow.postMessage({
+            giscus: {
+              setConfig: {
+                theme: newTheme
+              }
+            }
+          }, 'https://giscus.app');
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  })();
+</script>

@@ -1,0 +1,19 @@
+title: "QbProg's C++ and Geometry blog"
+description: "A blog about c++ and computational geometry"
+baseurl: ""           # lasciato vuoto per GitHub Pages
+url: "https://qbprog.github.io"
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+kramdown:
+  input: GFM # GitHub Flavored Markdown
+  syntax_highlighter: rouge
+
+
+author:
+  name: QbProg
+  email: not-your-business@domain.com
+
+minima:
+  show_excerpts: true
