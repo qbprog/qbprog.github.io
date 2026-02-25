@@ -17,3 +17,8 @@ author:
 
 minima:
   show_excerpts: true
+  
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  
